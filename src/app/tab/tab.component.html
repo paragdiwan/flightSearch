@@ -1,0 +1,5 @@
+<div class="tabContainer">
+    <span  *ngFor="let tab of tabNames">
+      <a href="javascript:void(0);" (click)="loadTabView(tab)" [ngClass]="{selected: tab === activeTab}"  title="{{tab}}">{{tab}}</a>
+    </span>
+</div>

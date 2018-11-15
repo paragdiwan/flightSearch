@@ -1,0 +1,37 @@
+@import "../../global";
+.formSearchFilght {
+    padding-bottom: 20px;
+    border-bottom: 1px solid $color;
+    input {
+        width: 80%;
+        padding: 10px 0 10px 5px;
+        border: 1px solid $color;
+        border-radius: 6px;
+    }
+
+    button {
+        height: 40px;
+        cursor: pointer;
+        border-radius: 5px;
+        width: 120px;
+        background-color: $buttonBackground;
+        color: $colorWhite;
+        border: 1px solid $colorWhite;
+        outline-color: $color;
+        font-size: 16px;
+        &.focus {
+            background: $color;
+        }
+        &.hover {
+            background: $color;
+        }
+    }
+}
+
+.sliderContainer {
+    padding: 20px 0;
+    p {
+        font-size: 18px;
+        font-weight: bold;
+    }
+}

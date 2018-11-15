@@ -1,0 +1,19 @@
+@import '../../global';
+
+
+.left-sidebar {
+  box-sizing: border-box;
+  display: inline-block;
+  width: 30%;
+  padding: 20px;
+}
+
+
+
+@include media($breakpoint4) {
+  .left-sidebar {
+    border-right: 1px solid $color;
+  }
+}
+
+

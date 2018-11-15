@@ -1,0 +1,39 @@
+@import "../../global";
+
+.tabContainer {
+    display: flex;
+    text-transform: capitalize;
+    padding: 10px 10px 10px 0;
+    span {
+        &:first-child
+        {
+            margin-left: 0;
+        }
+        a {
+            border: 1px solid transparent;
+            line-height: 1.15;
+            padding-top: 6px;
+            padding-bottom: 6px;
+            text-decoration: none;
+            border-radius: 2px;
+            border: 1px solid;
+            padding-left: 10px; 
+            text-align: center;
+            color: $color;
+            margin-left: -1px;
+            padding-right: 20px;
+            &.selected {
+                background: $tabBackground;
+                color: $color;
+                border: 1px solid $color;
+                border-radius: 3px;
+            }
+        }
+    }
+}
+
+
+
+
+
+

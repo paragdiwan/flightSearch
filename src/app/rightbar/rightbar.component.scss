@@ -1,0 +1,15 @@
+@import '../../global';
+
+.right-sidebar {
+  box-sizing: border-box;
+  display: inline-block;
+  width: 70%;
+  float: right;
+}
+
+@include media($breakpoint4) {
+  .right-sidebar {
+    
+  }
+
+}

@@ -1,0 +1,11 @@
+@import "../../global";
+
+.heading-container {
+  width: 100%;
+  border-bottom: 1px solid $color;
+  padding: 20px;
+  span {
+    font-weight: bold;
+    font-size: 24px;
+  }
+}

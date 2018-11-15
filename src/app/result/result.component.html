@@ -1,0 +1,7 @@
+<div *ngIf="flights">
+  <ul>
+    <li *ngFor="let flight of flights">
+      <app-flight [flight]="flight" ></app-flight>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,30 @@
+<div>
+  <form class="formSearchFilght" name="formSearchFilght">
+    <p><input placeholder="Enter departure city" type="text" name="sourceCity" [(ngModel)]="sourceCity"></p>
+    <p><input placeholder="Enter destination city" type="text" name="destinationCity" [(ngModel)]="destinationCity"></p>
+    <p><input placeholder="Enter departure date"  type="text" name="departureDate" [(ngModel)]="departureDate" onfocus="(this.type='date')"></p>
+    <p><input *ngIf="isRoundTrip === true" placeholder="Enter return date" name="returnDate"  [(ngModel)]="returnDate" type="text" onfocus="(this.type='date')"></p>
+    <p><input type="number" min="1" name="adult" [(ngModel)]="adults" placeholder="How many adults"></p>
+    <p><input type="number" min="0" name="child" [(ngModel)]="childs" placeholder="How many childrens"></p>
+    <p><input type="number" min="0" name="infant" [(ngModel)]="infants" placeholder="How many infants"></p>
+    <button type="button" (click)="findFlights()">Search</button>
+  </form>
+  <!-- ideally slider should be different componenent -->
+  <div class="sliderContainer">
+      <p>Refine search results</p>
+      <input type="range" min="1" max="100" value="50" list="tickmarks" class="slider" id="priceRange">
+      <datalist id="tickmarks">
+          <option value="0" label="0%">
+          <option value="10">
+          <option value="20">
+          <option value="30">
+          <option value="40">
+          <option value="50" label="50%">
+          <option value="60">
+          <option value="70">
+          <option value="80">
+          <option value="90">
+          <option value="100" label="100%">
+      </datalist>
+    </div>
+</div>

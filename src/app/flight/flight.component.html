@@ -1,0 +1,22 @@
+<div>
+  <p><span class="rs">Rs.</span><span>{{ flight.fair.totalFair }}</span></p>
+  <div class="flightCcontainer">
+      <div class="onGoingFlight">
+          <p>{{flight.flightId}}</p>
+          <p>{{flight.soureCityCode}}</p>
+          <p>{{flight.destinationCityCode}}</p>
+          <p><span>Depart: </span><span>{{flight.departureTime}}</span></p>
+          <p><span>Arrival: </span><span>{{flight.arrivalTime}}</span></p>
+      </div>
+      <div class="returnFlight">
+          <p>{{flight.flightId}}</p>
+          <p>{{flight.soureCityCode}}</p>
+          <p>{{flight.destinationCityCode}}</p>
+          <p><span>Depart: </span><span>{{flight.departureTime}}</span></p>
+          <p><span>Arrival: </span><span>{{flight.arrivalTime}}</span></p>
+      </div>
+      <div>
+        <button type="button" (click)="bookThisFlight()">Book this flight</button>
+      </div>
+  </div>
+</div>
