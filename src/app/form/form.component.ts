@@ -13,7 +13,7 @@ import { filter } from 'rxjs-compat/operator/filter';
   styleUrls: ['./form.component.scss']
 })
 export class FormComponent implements OnInit {
-
+  trip = [];
   adults: number;
   childs: number;
   infants: number;
@@ -27,6 +27,7 @@ export class FormComponent implements OnInit {
 
 
   constructor(private flightService: FlightService) {
+    this.isRoundTrip = false;
     this.flightService.activeTab
       .subscribe((activeTab: string) => {
         if (activeTab.toLowerCase() === 'one way') {
@@ -39,45 +40,74 @@ export class FormComponent implements OnInit {
       });
   }
 
-  private getOneWayTripResult = (flights): IFlight[] => {
-   const filteredResult = flights.filter((flight) => {
+  private sortFlights(criteria: string = 'lowToHigh', flights: IFlight[]) {
+    if (criteria === 'lowToHigh') {
+      return flights.sort(
+        (a: IFlight, b: IFlight) => {
+          return a.fair.adult - b.fair.adult;
+        });
+    } else {
+      return flights.sort(
+        (a: IFlight, b: IFlight) => {
+          return b.fair.adult - a.fair.adult;
+        });
+    }
+  }
+
+  private getOneWayTripResults = (flights): IFlight[] => {
+    const filteredResult = flights.filter((flight) => {
       return flight.departureCity.toLowerCase() === this.sourceCity.toLowerCase() &&
         flight.destinationCity.toLowerCase() === this.destinationCity.toLowerCase() &&
         flight.flightDepartureDate === this.departureDate;
     });
-    return filteredResult;
+    return filteredResult.length ? filteredResult : null;
   }
 
   private getRoundTripResults = (flights): IFlight[] => {
     const filteredResult = flights.filter((flight) => {
-        return flight.destinationCity.toLowerCase() === this.sourceCity.toLowerCase() &&
+      return flight.destinationCity.toLowerCase() === this.sourceCity.toLowerCase() &&
         flight.departureCity.toLowerCase() === this.destinationCity.toLowerCase() &&
         flight.flightDepartureDate === this.returnDate;
     });
-    return filteredResult;
+    return filteredResult.length ? filteredResult : null;
   }
 
 
-  public findFlights = () => {
+  public findFlights = (): any => {
     if (this.sourceCity && this.destinationCity) {
       this.flightService.getFlights()
         .map((response: Response) => {
-          const flights: IFlight[] = response.json();
-          const result = {
-            singleTrip: [],
-            returnTrip: []
+          let flights: IFlight[] = response.json();
+          let singleTrip = [];
+          let returnTrip = [];
+          let tmp;
+          flights = this.sortFlights('lowToHigh', flights);
+          const flightDetails = {
+            'departureCity': this.sourceCity,
+            'destinationCity': this.destinationCity,
+            'isRoundTrip': this.isRoundTrip,
+            'departureDate': this.departureDate,
+            'returnDate': (this.isRoundTrip ? this.returnDate : null)
           };
+          this.trip = [];
+          singleTrip = this.getOneWayTripResults(flights);
           if (!this.isRoundTrip) {
-            result.singleTrip.push(this.getOneWayTripResult(flights));
+            singleTrip.map((onewayflights, index) => {
+              tmp = [onewayflights, null];
+               this.trip.push(tmp);
+             });
           } else {
-            result.singleTrip.push(this.getOneWayTripResult(flights));
-            result.returnTrip.push(this.getRoundTripResults(flights));
+            returnTrip = this.getRoundTripResults(flights);
+            singleTrip.map((onewayflights, index) => {
+             tmp = [onewayflights, returnTrip[index]];
+              this.trip.push(tmp);
+            });
           }
-          return result;
+          return [flightDetails, this.trip];
         })
         .subscribe(
-          (flights: any): any => {
-            this.flightService.searchResults.next(flights);
+          (trip: any): any => {
+            this.flightService.searchResults.next(trip);
           },
           (error) => {
             console.log(error);

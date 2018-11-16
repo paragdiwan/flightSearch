@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { IFlight } from '../../models/flight';
+import { transitiveScopesFor } from '@angular/core/src/render3/jit/module';
 
 @Component({
   selector: 'app-flight',
@@ -17,7 +18,7 @@ export class FlightComponent implements IFlight, OnInit {
   destinationFlightDetails;
   fair: { adult: number; child: number; infant: number; totalFair: number; };
   passangers: { adults: number; children: number; infants: number; };
-   @Input() flight: IFlight;
+  @Input() trip;
   constructor() {
   }
   ngOnInit() {

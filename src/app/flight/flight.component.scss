@@ -1,3 +1,64 @@
-.flightCcontainer {
+@import "../../global";
+
+.flightContainer {
     width: 100%;
+    .flight {
+        border: 1px solid $color;
+        padding: 20px;
+        margin-bottom: 20px;
+        background: $colorBlue;
+        .priceDetails {
+            .price {
+                font-size: 35px;
+                $color: $colorBlack;
+                margin: 0;
+            }
+        }
+        .flightDetails {
+            display: flex;
+            span {
+                font-weight: bold;
+            }
+            label {
+                font-size: 20px;
+                font-weight: bold;
+            }
+            .oneway {
+                flex: 1;
+                width: 33%;
+                margin-right: 20px;
+                margin-top: 20px;
+                background: #487eb0;
+                color: $colorWhite;
+                padding-left: 10px;
+            }
+            .return {
+                flex: 1;
+                width: 33%;
+                margin-right: 20px;
+                margin-top: 20px;
+                background: #273c75;
+                color:  $colorWhite;
+                padding-left: 10px;
+            }
+            .book {
+                flex: 1;
+                width: 33%;
+                justify-content: center;
+                flex-direction: column;
+                text-align: center;
+                margin-top: 30px;
+                button {
+                    border-radius: 3px;
+                    border: 1px solid $color;
+                    height: 50px;
+                    width: 150px;
+                    margin-top: 40px;
+                    cursor: pointer;
+                    color: $color;
+                    font-size: 16px;
+                }
+            }
+        }
+    }
 }

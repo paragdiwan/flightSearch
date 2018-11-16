@@ -1,13 +1,13 @@
 <div>
   <form class="formSearchFilght" name="formSearchFilght">
-    <p><input placeholder="Enter departure city" type="text" name="sourceCity" [(ngModel)]="sourceCity"></p>
-    <p><input placeholder="Enter destination city" type="text" name="destinationCity" [(ngModel)]="destinationCity"></p>
-    <p><input placeholder="Enter departure date"  type="text" name="departureDate" [(ngModel)]="departureDate" onfocus="(this.type='date')"></p>
-    <p><input *ngIf="isRoundTrip === true" placeholder="Enter return date" name="returnDate"  [(ngModel)]="returnDate" type="text" onfocus="(this.type='date')"></p>
-    <p><input type="number" min="1" name="adult" [(ngModel)]="adults" placeholder="How many adults"></p>
-    <p><input type="number" min="0" name="child" [(ngModel)]="childs" placeholder="How many childrens"></p>
-    <p><input type="number" min="0" name="infant" [(ngModel)]="infants" placeholder="How many infants"></p>
-    <button type="button" (click)="findFlights()">Search</button>
+    <p><input required placeholder="Enter departure city" type="text" name="sourceCity" [(ngModel)]="sourceCity"></p>
+    <p><input required placeholder="Enter destination city" type="text" name="destinationCity" [(ngModel)]="destinationCity"></p>
+    <p><input required placeholder="Enter departure date"  type="text" name="departureDate" [(ngModel)]="departureDate" onfocus="(this.type='date')"></p>
+    <p><input required *ngIf="isRoundTrip === true" placeholder="Enter return date" name="returnDate"  [(ngModel)]="returnDate" type="text" onfocus="(this.type='date')"></p>
+    <p><input required type="number" min="1" name="adult" [(ngModel)]="adults" placeholder="How many adults"></p>
+    <p><input required type="number" min="0" name="child" [(ngModel)]="childs" placeholder="How many childrens"></p>
+    <p><input required type="number" min="0" name="infant" [(ngModel)]="infants" placeholder="How many infants"></p>
+    <button  ng-disabled="formSearchFilght.$invalid" type="submit" (click)="findFlights()">Search</button>
   </form>
   <!-- ideally slider should be different componenent -->
   <div class="sliderContainer">
@@ -26,5 +26,6 @@
           <option value="90">
           <option value="100" label="100%">
       </datalist>
+      <p><span>Rs.</span><span class="selectedPrice"></span></p>
     </div>
 </div>

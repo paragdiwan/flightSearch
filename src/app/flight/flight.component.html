@@ -1,22 +1,36 @@
-<div>
-  <p><span class="rs">Rs.</span><span>{{ flight.fair.totalFair }}</span></p>
-  <div class="flightCcontainer">
-      <div class="onGoingFlight">
-          <p>{{flight.flightId}}</p>
-          <p>{{flight.soureCityCode}}</p>
-          <p>{{flight.destinationCityCode}}</p>
-          <p><span>Depart: </span><span>{{flight.departureTime}}</span></p>
-          <p><span>Arrival: </span><span>{{flight.arrivalTime}}</span></p>
-      </div>
-      <div class="returnFlight">
-          <p>{{flight.flightId}}</p>
-          <p>{{flight.soureCityCode}}</p>
-          <p>{{flight.destinationCityCode}}</p>
-          <p><span>Depart: </span><span>{{flight.departureTime}}</span></p>
-          <p><span>Arrival: </span><span>{{flight.arrivalTime}}</span></p>
-      </div>
-      <div>
-        <button type="button" (click)="bookThisFlight()">Book this flight</button>
-      </div>
-  </div>
+<div *ngIf="trip" class="flightContainer">
+    <div class="flight">
+        <div class="priceDetails">
+            <p class="price oneway" *ngIf="!trip[1]">Rs. {{ trip[0].fair.adult + trip[0].fair.child + trip[0].fair.infant }}
+            </p>
+            <p class="price twoway" *ngIf="trip[0] && trip[1]">Rs. 
+                {{ 
+                trip[0].fair.adult + 
+                trip[0].fair.child + 
+                trip[0].fair.infant +
+                trip[1].fair.adult +
+                trip[1].fair.child + trip[1].fair.infant 
+                }}
+            </p>
+        </div>
+        <div class="flightDetails">
+            <div class="oneway" [ngClass]="{'onewayonly': !trip[1]&&trip[0]}">
+               <p> {{ trip[0].flightName }} </p>
+               <p> <label for="from">From: </label> <span> {{ trip[0].departureCity }} </span><label for="to"> To </label> <span>{{ trip[0].destinationCity }} </span></p>
+               <p> <label for="departure city">Depart: </label> <span> {{ trip[0].departureTime }} </span></p>
+               <p> <label for="arrival city">Arrive: </label> <span> {{ trip[0].arrivalTime }} </span></p>
+            </div>
+
+            <div *ngIf="trip[1]"  class="return">
+                <p> {{ trip[1].flightName }} </p>
+                <p> <label for="from">From: </label><span> {{ trip[1].departureCity }} To {{ trip[1].destinationCity }} </span></p>
+                <p> <label for="departure city">Depart: </label> <span> {{ trip[1].departureTime }} </span></p>
+               <p> <label for="arrival city">Arrive: </label><span>  {{ trip[1].arrivalTime }}</span> </p>
+            </div>
+            <div class="book">
+                <button title="book this flight" class="bookThis">Book this flight </button>
+            </div>
+        </div>
+
+    </div>
 </div>
