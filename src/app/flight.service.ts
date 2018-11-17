@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-
-import { IFlight } from 'src/models/flight';
+import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -10,9 +8,9 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class FlightService {
-  searchResults: Subject<IFlight> = new Subject();
+  searchResults: Subject<[Object, any[]]> = new Subject();
   activeTab: Subject<string> = new Subject();
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient ) { }
 
   getFlights() {
     return this.http.get(`${environment.flightAPI}`);

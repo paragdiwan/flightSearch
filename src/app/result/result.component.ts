@@ -1,15 +1,16 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FlightService } from '../flight.service';
 import { IFlight } from 'src/models/flight';
+import { Response } from '@angular/http';
 
 @Component({
   selector: 'app-result',
   templateUrl: './result.component.html',
   styleUrls: ['./result.component.scss']
 })
-export class ResultComponent implements OnInit, OnDestroy {
+export class ResultComponent implements OnInit {
   trips: {};
-  flightDetails: [];
+  flightDetails;
   isRoundTrip: string;
 
   constructor(private flightService: FlightService) {
@@ -18,7 +19,7 @@ export class ResultComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.flightService.searchResults
-      .subscribe((response: any) => {
+      .subscribe((response: any): any => {
         if (response) {
           this.flightDetails = response[0];
           const trips = response[1];
@@ -34,10 +35,5 @@ export class ResultComponent implements OnInit, OnDestroy {
 
       });
   }
-
-  ngOnDestroy() {
-    console.log('here');
-  }
-
 
 }

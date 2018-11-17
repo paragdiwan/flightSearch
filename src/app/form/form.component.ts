@@ -1,8 +1,9 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { FlightService } from '../flight.service';
 import 'rxjs/rx';
 import { Response } from '@angular/http';
 import { IFlight } from 'src/models/flight';
+import {HttpResponse} from '@angular/common/http';
 
 
 
@@ -17,7 +18,7 @@ export class FormComponent implements OnInit {
   returnTrip = [];
 
   trips: IFlight;
-  flightResponse: IFlight[];
+  flightResponse;
   adults: number;
   childs: number;
   infants: number;
@@ -26,11 +27,9 @@ export class FormComponent implements OnInit {
   departureDate: Date;
   returnDate: Date;
   isRoundTrip: boolean;
-  souceFlights: IFlight[];
-  destinationFlights: IFlight[];
   rangeSlider: any;
   selectedPrice: number;
-  @Output() open: EventEmitter<any> = new EventEmitter();
+
 
   constructor(private flightService: FlightService) {
     this.isRoundTrip = false;
@@ -46,7 +45,7 @@ export class FormComponent implements OnInit {
         }
       });
   }
-
+  // Data structure : [ongoing, null] as no return flight required.
   private filterByPrice(flights: IFlight[]): IFlight[] {
     const filteredResponse = flights.filter((flight) => {
       return ((flight.fair.adult + flight.fair.child + flight.fair.infant) >= this.selectedPrice);
@@ -54,14 +53,21 @@ export class FormComponent implements OnInit {
     return filteredResponse;
   }
 
+  // @TODO: Can be enhanced by multiplying with selected combination of adult,infant etc.
+  // to show actual prices.
+  // Data structure: [ongoing, return] that represents 1 Flight.
   private filterPriceForReturnFlight(flights?: Array<IFlight>) {
-    const filteredResponse =  this.trip.filter((flight) => {
-      return  flight[0].fair.adult + flight[0].fair.child + flight[0].fair.infant +
-              flight[1].fair.adult + flight[1].fair.child + flight[1].fair.infant
-               >= this.selectedPrice;
+    const filteredResponse = this.trip.filter((flight) => {
+      return flight[0].fair.adult + flight[0].fair.child + flight[0].fair.infant +
+        flight[1].fair.adult + flight[1].fair.child + flight[1].fair.infant
+        >= this.selectedPrice;
     });
     return filteredResponse;
   }
+
+  // sort flights based on criteria.
+  // Ideally take MIN & MAX limit & pass it to slider that will contain
+  // exact values.
 
   private sortFlights(criteria: string = 'lowToHigh', flights: IFlight[]) {
     if (criteria === 'lowToHigh') {
@@ -76,6 +82,7 @@ export class FormComponent implements OnInit {
         });
     }
   }
+  // Find Oneway flights based on current search criteria.
 
   private getOneWayTripResults = (flights): IFlight[] => {
     const filteredResult = flights.filter((flight) => {
@@ -86,6 +93,9 @@ export class FormComponent implements OnInit {
     return filteredResult.length ? filteredResult : null;
   }
 
+  // Return flights are same as Oneway flights
+  // only thing it's departure date == return date.
+
   private getRoundTripResults = (flights): IFlight[] => {
     const filteredResult = flights.filter((flight) => {
       return flight.destinationCity.toLowerCase() === this.sourceCity.toLowerCase() &&
@@ -95,7 +105,7 @@ export class FormComponent implements OnInit {
     return filteredResult.length ? filteredResult : null;
   }
 
-  private getFlightDetailsFromSearchForm() {
+  private getFlightDetailsFromSearchForm(): Object {
     return {
       'departureCity': this.sourceCity,
       'destinationCity': this.destinationCity,
@@ -105,12 +115,16 @@ export class FormComponent implements OnInit {
     };
   }
 
-  private handleRangeSlider() {
+  // Slider handler.
+  // @TODO: PIPES can be used to filter data.
+  private handleRangeSlider(): any {
     let tmp = [];
     let returnTrip = [];
     let localSingleTrip = [];
     this.selectedPrice = this.rangeSlider;
+
     const flightDetails = this.getFlightDetailsFromSearchForm();
+
     if (this.flightResponse) {
 
       // This meant the response is already present.
@@ -130,7 +144,7 @@ export class FormComponent implements OnInit {
       }
 
       this.flightService.searchResults
-        .next([flightDetails, returnTrip]);
+        .next([ flightDetails , returnTrip ]);
     }
   }
 
@@ -140,7 +154,7 @@ export class FormComponent implements OnInit {
       this.flightService.getFlights()
         .map((response: Response) => {
           let tmp;
-          this.flightResponse = response.json();
+          this.flightResponse = response;
           if (this.flightResponse) {
             this.flightResponse = this.sortFlights('lowToHigh', this.flightResponse);
             this.singleTrip = this.getOneWayTripResults(this.flightResponse);

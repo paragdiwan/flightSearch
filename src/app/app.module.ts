@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,11 +10,13 @@ import { FormComponent } from './form/form.component';
 import { ResultComponent } from './result/result.component';
 import { LeftbarComponent } from './leftbar/leftbar.component';
 import { RightbarComponent } from './rightbar/rightbar.component';
-import { LayoutComponent } from './layout/layout.component';
+
 import { FlightService } from './flight.service';
+
 import { HttpModule } from '@angular/http';
 import { FlightComponent } from './flight/flight.component';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -25,16 +27,19 @@ import { FormsModule } from '@angular/forms';
     ResultComponent,
     LeftbarComponent,
     RightbarComponent,
-    LayoutComponent,
     FlightComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    HttpModule,
-    FormsModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [FlightService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA,
+    NO_ERRORS_SCHEMA
+  ]
 })
 export class AppModule { }

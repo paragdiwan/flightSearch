@@ -1,5 +1,6 @@
 import {Component, Input, Output, OnInit} from '@angular/core';
 import { IFlight } from '../../models/flight';
+import { TabComponent } from '../tab/tab.component';
 
 @Component({
   selector: 'app-leftbar',
@@ -9,23 +10,10 @@ import { IFlight } from '../../models/flight';
 export class LeftbarComponent implements OnInit {
   @Input() flights: IFlight;
   @Output() searchFlights: IFlight[];
-  minRange: number;
-  maxRange: number;
-  range: number;
-
   constructor() {
   }
 
-  getMinRange() {
-    this.minRange = 5;
-  }
-
-  getMaxRange() {
-    this.maxRange = 100;
-  }
-
   ngOnInit() {
-    console.log(this.flights);
   }
 
 }

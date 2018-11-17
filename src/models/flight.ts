@@ -1,23 +1,17 @@
+// Represents IFlight model
 export interface IFlight {
-      flightClass: string;
       flightId: string;
       flightName: string;
       flightDepartureDate: string;
-      returnDate?: string;
       departureCity: string;
       destinationCity: string;
-      sourceFlightDetails: []; // runtime manipulation.
-      destinationFlightDetails: []; // runtime manipulation.
       fair: {
         adult: number,
         child: number,
         infant: number,
-        totalFair: number
+        totalFair: number // @TODO: update totalFair based on selected combination.
       };
-      passangers: {
-        adults: number,
-        children: number,
-        infants: number
-      };
+      arrivalTime: string;
+      departureTime: string;
 }
 

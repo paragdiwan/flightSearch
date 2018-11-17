@@ -11,8 +11,6 @@ export class RightbarComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log('Inside child controller');
-    console.log(this.flights);
   }
 
 }

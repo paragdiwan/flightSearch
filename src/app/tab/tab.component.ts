@@ -7,7 +7,7 @@ import { FlightService } from '../flight.service';
   styleUrls: ['./tab.component.scss']
 })
 export class TabComponent implements OnInit {
-  @Input() tabs;
+  @Input() tabs: [string];
   tabNames: Array<string>;
   activeTab: string;
 

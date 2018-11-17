@@ -7,20 +7,24 @@ import { IFlight } from '../../models/flight';
   styleUrls: ['./flight.component.scss']
 })
 export class FlightComponent implements IFlight, OnInit {
-  flightClass: string;
+  arrivalTime: string;
   flightId: string;
+  departureTime: string;
   flightName: string;
   flightDepartureDate: string;
   departureCity: string;
   destinationCity: string;
-  sourceFlightDetails;
-  destinationFlightDetails;
   fair: { adult: number; child: number; infant: number; totalFair: number; };
-  passangers: { adults: number; children: number; infants: number; };
-  @Input() trip;
+
+  // In case one way 'trip' contains only single object whereas
+  // in 'return' trip , it contains a [oneway,twoway] object.
+
+  @Input() trip: Array<any>;
+
   constructor() {
   }
   ngOnInit() {
   }
+
 
 }
