@@ -14,7 +14,7 @@
             </p>
         </div>
         <div class="flightDetails">
-            <div class="oneway" [ngClass]="{'onewayonly': !trip[1]&&trip[0]}">
+            <div class="oneway">
                <p> {{ trip[0].flightName }} </p>
                <p> <label for="from">From: </label> <span> {{ trip[0].departureCity }} </span><label for="to"> To </label> <span>{{ trip[0].destinationCity }} </span></p>
                <p> <label for="departure city">Depart: </label> <span> {{ trip[0].departureTime }} </span></p>

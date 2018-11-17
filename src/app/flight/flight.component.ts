@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { IFlight } from '../../models/flight';
-import { transitiveScopesFor } from '@angular/core/src/render3/jit/module';
 
 @Component({
   selector: 'app-flight',

@@ -6,9 +6,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 
 import { TabComponent } from './tab/tab.component';
-import { SliderComponent } from './slider/slider.component';
 import { FormComponent } from './form/form.component';
-import { BreadcrumComponent } from './breadcrum/breadcrum.component';
 import { ResultComponent } from './result/result.component';
 import { LeftbarComponent } from './leftbar/leftbar.component';
 import { RightbarComponent } from './rightbar/rightbar.component';
@@ -23,9 +21,7 @@ import { FormsModule } from '@angular/forms';
     AppComponent,
     HeaderComponent,
     TabComponent,
-    SliderComponent,
     FormComponent,
-    BreadcrumComponent,
     ResultComponent,
     LeftbarComponent,
     RightbarComponent,

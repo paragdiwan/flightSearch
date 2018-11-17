@@ -1,18 +1,21 @@
-<div class="flightSearchResults" *ngIf="flightDetails">
+<div class="flightSearchResults" *ngIf="flightDetails && trips.length" >
   <div class="container">
     <div class="places">
-      <span>{{ flightDetails.departureCity }} > {{ flightDetails.destinationCity }} </span>
-      <span *ngIf="isRoundTrip">> {{ flightDetails.departureCity }} </span>
+      <span>{{ flightDetails.departureCity.toUpperCase() }} > {{ flightDetails.destinationCity.toUpperCase() }} </span>
+      <span *ngIf="isRoundTrip">> {{ flightDetails.departureCity.toUpperCase() }} </span>
     </div>
     <div class="dates">
-      <p><label for="departure date">Depart: </label> {{ flightDetails.departureDate }}</p>
-      <p *ngIf="isRoundTrip"><label for="Return date">Return: </label> {{flightDetails.returnDate}} </p>
+      <p><label for="departure date">Depart: </label> <strong>{{ flightDetails.departureDate }}</strong></p>
+      <p *ngIf="isRoundTrip"><label for="Return date">Return: </label> <strong>{{flightDetails.returnDate}} </strong></p>
     </div>
   </div>
-
   <div class="flights">
     <div class="flight" *ngFor="let trip of trips">
       <app-flight [trip]="trip"></app-flight>
     </div>
+   
   </div>
+</div>
+<div *ngIf="!trips.length">
+    <p class="warning">No seasults found or you've not initiated search !</p>
 </div>

@@ -12,21 +12,24 @@ export class ResultComponent implements OnInit, OnDestroy {
   flightDetails: [];
   isRoundTrip: string;
 
-  constructor(private flightService: FlightService) { }
+  constructor(private flightService: FlightService) {
+    this.trips = false;
+  }
 
   ngOnInit() {
     this.flightService.searchResults
       .subscribe((response: any) => {
-        this.trips = '';
-        console.log(response);
-        this.flightDetails = response[0];
-        const trips = response[1];
-        console.log(trips);
-        this.isRoundTrip = this.flightDetails['isRoundTrip'];
-        if (this.isRoundTrip ) {
-          this.trips = trips;
-        } else if (!this.isRoundTrip) {
-          this.trips = trips;
+        if (response) {
+          this.flightDetails = response[0];
+          const trips = response[1];
+          this.isRoundTrip = this.flightDetails['isRoundTrip'];
+          if (this.isRoundTrip) {
+            this.trips = trips;
+          } else if (!this.isRoundTrip) {
+            this.trips = trips;
+          }
+        } else {
+          this.trips = false;
         }
 
       });

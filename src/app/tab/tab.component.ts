@@ -14,6 +14,8 @@ export class TabComponent implements OnInit {
   loadTabView(activeTab): void {
     this.flightService.activeTab.next(activeTab);
     this.activeTab = activeTab;
+    this.flightService.searchResults
+      .next(null);
   }
 
   constructor(private flightService: FlightService) {
