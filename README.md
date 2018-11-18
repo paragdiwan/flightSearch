@@ -1,12 +1,12 @@
 # Flight search engine
 
-This application is developed in Angular 7 using Rx Observables. Cross component communication is done via 'subject' observable.
+This application is developed in Angular 6 using Rx Observables. Cross component communication is done via 'subject' observable.
 
 The application is a simple flight search based on the criteria defined by end user. 
 
 ## Installation
 
-> Run **npm install**
+> Run **npm install** & then **npm serve**
 
 ## Backend 
 Used firebase to create `flight API`. This is configured in the environment settings.
