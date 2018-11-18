@@ -14,6 +14,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import {HttpModule} from '@angular/http';
+import {HttpTestingController} from '@angular/common/http/testing';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -36,7 +37,7 @@ describe('AppComponent', () => {
           FlightComponent,
         ],
       ],
-      providers: [FlightService, HttpClientModule]
+      providers: [FlightService, HttpClientModule, HttpTestingController]
     }).compileComponents();
   }));
 

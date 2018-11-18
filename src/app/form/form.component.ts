@@ -24,7 +24,7 @@ export class FormComponent implements OnInit {
   infants: number;
   sourceCity: string;
   destinationCity: string;
-  departureDate: Date;
+  departureDate: string;
   returnDate: Date;
   isRoundTrip: boolean;
   rangeSlider: any;
@@ -165,7 +165,7 @@ export class FormComponent implements OnInit {
 
 
   public findFlights = (): any => {
-    if (this.sourceCity && this.destinationCity) {
+    if (this.sourceCity && this.destinationCity && this.adults && this.departureDate) {
       const flightDetails = this.getFlightDetailsFromSearchForm();
       this.flightService.getFlights()
         .pipe(
