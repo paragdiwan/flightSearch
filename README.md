@@ -4,6 +4,10 @@ This application is developed in Angular 7 using Rx Observables. Cross component
 
 The application is a simple flight search based on the criteria defined by end user. 
 
+## Installation
+
+> Run **npm install**
+
 ## Backend 
 Used firebase to create `flight API`. This is configured in the environment settings.
 
@@ -20,11 +24,13 @@ Used firebase to create `flight API`. This is configured in the environment sett
 
 ## How to test with test data
 
-Departure city: Kolkatta
-Arrival city: Delhi
-Departure date: 17/12/2018
-Return date: 24/12/2018
+- Departure city: **Kolkatta**
+- Arrival city: **Delhi**
+- Departure date: **17/12/2018**
+- Return date: **24/12/2018**
 
 ## API URL
 https://temp-81194.firebaseio.com/listing/flights.json
+
+
 
