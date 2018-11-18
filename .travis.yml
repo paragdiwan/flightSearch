@@ -1,5 +1,5 @@
 dist: trusty
-sudo: false
+sudo: true
 
 language: node_js
 node_js:
@@ -12,12 +12,9 @@ addons:
     packages:
     - google-chrome-stable
 
-cache:
-  directories:
-  - ./node_modules
 
 install:
 - npm install
 
 script:
-- npm run test -- --single-run --no-progress --browser=ChromeHeadlessCI
+- npm run test
