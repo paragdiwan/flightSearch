@@ -3,8 +3,7 @@ import { FlightService } from '../flight.service';
 import 'rxjs/rx';
 import { Response } from '@angular/http';
 import { IFlight } from 'src/models/flight';
-
-
+import { map } from 'rxjs/operators';
 
 
 @Component({
@@ -170,7 +169,8 @@ export class FormComponent implements OnInit {
     if (this.sourceCity && this.destinationCity) {
       const flightDetails = this.getFlightDetailsFromSearchForm();
       this.flightService.getFlights()
-        .map((response: Response) => {
+        .pipe(
+          map((response: Response) => {
           let tmp;
           this.flightResponse = response;
           if (this.flightResponse) {
@@ -194,6 +194,7 @@ export class FormComponent implements OnInit {
             return [flightDetails, this.trip];
           }
         })
+        )
         .subscribe(
           (trips: any): any => {
             this.trips = trips;
