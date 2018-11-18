@@ -3,7 +3,7 @@ import { FlightService } from '../flight.service';
 import 'rxjs/rx';
 import { Response } from '@angular/http';
 import { IFlight } from 'src/models/flight';
-import {HttpResponse} from '@angular/common/http';
+
 
 
 
