@@ -36,10 +36,6 @@ import {HttpClientModule} from '@angular/common/http';
     ReactiveFormsModule
   ],
   providers: [FlightService],
-  bootstrap: [AppComponent],
-  schemas: [
-    CUSTOM_ELEMENTS_SCHEMA,
-    NO_ERRORS_SCHEMA
-  ]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

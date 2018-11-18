@@ -36,11 +36,7 @@ describe('AppComponent', () => {
           FlightComponent,
         ],
       ],
-      providers: [FlightService, HttpClientModule],
-      schemas: [
-        CUSTOM_ELEMENTS_SCHEMA,
-        NO_ERRORS_SCHEMA
-      ]
+      providers: [FlightService, HttpClientModule]
     }).compileComponents();
   }));
 

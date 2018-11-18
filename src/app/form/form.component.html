@@ -2,17 +2,17 @@
   <form class="formSearchFilght" name="formSearchFilght" #formSearchFilght="ngForm" (ngSubmit)="findFlights()" >
     <p><input class="form-control" required placeholder="Enter departure city" type="text" name="sourceCity" [(ngModel)]="sourceCity"></p>
     <p><input class="form-control" required placeholder="Enter destination city" type="text" name="destinationCity" [(ngModel)]="destinationCity"></p>
-    <p><input class="form-control" required placeholder="Enter departure date"  type="text" name="departureDate" [(ngModel)]="departureDate" onfocus="(this.type='date')"></p>
-    <p><input class="form-control" required required *ngIf="isRoundTrip === true" placeholder="Enter return date" name="returnDate"  [(ngModel)]="returnDate" type="text" onfocus="(this.type='date')"></p>
+    <p><input class="form-control" required placeholder="Enter departure date"  min="{{today}}" type="{{changeType}}"  name="departureDate" [(ngModel)]="departureDate" (focus)="disablePastDate()"></p>
+    <p><input class="form-control" required  *ngIf="isRoundTrip === true" min="{{today}}" type="{{changeType}}" placeholder="Enter return date" name="returnDate"  [(ngModel)]="returnDate" type="text"  (focus)="disablePastDate()"></p>
     <p><input class="form-control" required type="number" min="1" name="adult" [(ngModel)]="adults" placeholder="How many adults"></p>
-    <p><input class="form-control"  type="number" min="0" name="child" [(ngModel)]="childs" placeholder="How many childrens"></p>
-    <p><input class="form-control"  type="number" min="0" name="infant" [(ngModel)]="infants" placeholder="How many infants"></p>
+    <p><input class="form-control"  value="0" type="number" min="0" name="child" [(ngModel)]="childs" placeholder="How many childrens"></p>
+    <p><input class="form-control"  value="0" type="number" min="0" name="infant" [(ngModel)]="infants" placeholder="How many infants"></p>
     <button [disabled]="!formSearchFilght.form.valid" type="submit">Search</button>
  
   <!-- ideally slider should be different componenent -->
     <div class="sliderContainer">
       <p>Refine search results</p>
-      <input (mouseup)="handleRangeSlider()" type="range" min="0" max="90000" value="0"  name="rangeSlider" [(ngModel)]="rangeSlider" list="tickmarks" class="slider" id="priceRange">
+      <input (mouseup)="handleRangeSlider()" type="range" min="0" max="90000" value="0"  name="rangeSlider" [(ngModel)]="rangeSlider" class="slider" id="priceRange">
       <p><span>Rs.</span><span class="selectedPrice">{{selectedPrice || 0}}</span></p>
     </div>
   </form>

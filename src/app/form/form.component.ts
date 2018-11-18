@@ -16,6 +16,8 @@ export class FormComponent implements OnInit {
   trip = [];
   singleTrip = [];
   returnTrip = [];
+  today: string;
+  changeType: string; // change the input type from text to date.
 
   trips: IFlight;
   flightResponse;
@@ -147,6 +149,22 @@ export class FormComponent implements OnInit {
         .next([ flightDetails , returnTrip ]);
     }
   }
+
+  private disablePastDate() {
+    this.changeType = 'date';
+    const dtToday = new Date();
+    let month: any = dtToday.getMonth() + 1;
+    let day: any = dtToday.getDate();
+    const year = dtToday.getFullYear();
+    if (month < 10) {
+      month = '0' + month.toString();
+    }
+    if (day < 10) {
+      day = '0' + day.toString();
+    }
+    this.today = year + '-' + month + '-' + day;
+  }
+
 
   public findFlights = (): any => {
     if (this.sourceCity && this.destinationCity) {
